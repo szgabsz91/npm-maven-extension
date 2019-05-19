@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+
+    working_directory: ~/npm-maven-extension
+
+    docker:
+      - image: openjdk:12-jdk-oracle
+
+    steps:
+
+      - checkout
+
+      - run:
+          name: Copy settings.xml
+          command: mkdir -p ~/.m2 && cp ./.circleci/settings.xml ~/.m2/settings.xml
+
+      - run:
+          name: Build framework
+          command: ./mvnw clean site install
+
+      - run:
+          name: Build demo application
+          command: |
+              cd demo
+              ./mvnw clean install
