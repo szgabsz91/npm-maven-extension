@@ -28,7 +28,7 @@
         <logback.version>1.2.3</logback.version>
         <junit.version>5.4.2</junit.version>
         <assertj.version>3.12.2</assertj.version>
-        <commons-compress.version>1.19</commons-compress.version>
+        <commons-compress.version>1.21</commons-compress.version>
         <repository.path>${project.build.directory}/local-repository</repository.path>
     </properties>
 
