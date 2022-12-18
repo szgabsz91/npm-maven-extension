@@ -3,16 +3,15 @@ package com.github.szgabsz91.maven.extensions.npm;
 import com.github.szgabsz91.maven.extensions.npm.model.NpmPackage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.auth.CredentialsProviderBuilder;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.http.HttpStatus;
 import org.apache.maven.wagon.AbstractWagon;
 import org.apache.maven.wagon.ResourceDoesNotExistException;
 import org.apache.maven.wagon.TransferFailedException;
@@ -161,13 +160,15 @@ public class NpmWagon extends AbstractWagon {
         CredentialsProvider credentialsProvider = null;
 
         if (authenticationInfo.getUserName() != null) {
-            credentialsProvider = new BasicCredentialsProvider();
-            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(authenticationInfo.getUserName(), authenticationInfo.getPassword()));
+            credentialsProvider = CredentialsProviderBuilder.create()
+                .add(new HttpHost(repository.getHost(), repository.getPort()), authenticationInfo.getUserName(), authenticationInfo.getPassword().toCharArray())
+                .build();
         }
 
         CloseableHttpClient httpClient = HttpClients
             .custom()
             .setDefaultCredentialsProvider(credentialsProvider)
+
             .build();
         CloseableHttpResponse closeableHttpResponse = null;
 
@@ -176,7 +177,7 @@ public class NpmWagon extends AbstractWagon {
             log.info("Downloading npm package {} from {}", npmPackage, url);
             HttpGet httpGet = new HttpGet(url);
             closeableHttpResponse = httpClient.execute(httpGet);
-            int statusCode = closeableHttpResponse.getStatusLine().getStatusCode();
+            int statusCode = closeableHttpResponse.getCode();
             if (statusCode != HttpStatus.SC_OK) {
                 throw new ResourceDoesNotExistException("Cannot download npm package " + resourceName + ", status code: " + statusCode);
             }

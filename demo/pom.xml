@@ -15,15 +15,15 @@
 	<description>Demo application for npm-maven-extension and npm-maven-plugin</description>
 
 	<properties>
-		<java.version>12</java.version>
+		<java.version>18</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<bootstrap.version>4.3.1</bootstrap.version>
-		<_angular_router.version>7.2.15</_angular_router.version>
-		<maven-war-plugin.version>3.2.2</maven-war-plugin.version>
-		<docker-maven-plugin.version>0.30.0</docker-maven-plugin.version>
+		<bootstrap.version>5.2.3</bootstrap.version>
+		<_angular_router.version>15.0.4</_angular_router.version>
+		<maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+		<docker-maven-plugin.version>0.40.2</docker-maven-plugin.version>
 	</properties>
 
 	<dependencies>

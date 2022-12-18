@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/npm-maven-extension
 
     docker:
-      - image: openjdk:12-jdk-oracle
+      - image: openjdk:19-jdk-oracle
 
     steps:
 
