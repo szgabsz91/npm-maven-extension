@@ -18,17 +18,17 @@
     <description>Maven extension for managing npm package dependencies with Maven</description>
 
     <properties>
-        <wagon.version>3.3.2</wagon.version>
-        <plexus.version>2.0.0</plexus.version>
-        <commons-io.version>2.6</commons-io.version>
-        <velocity.version>1.7</velocity.version>
-        <httpclient.version>4.5.8</httpclient.version>
-        <lombok.version>1.18.8</lombok.version>
-        <slf4j.version>1.7.26</slf4j.version>
-        <logback.version>1.2.3</logback.version>
-        <junit.version>5.4.2</junit.version>
-        <assertj.version>3.12.2</assertj.version>
-        <commons-compress.version>1.19</commons-compress.version>
+        <wagon.version>3.5.2</wagon.version>
+        <plexus.version>2.1.1</plexus.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <velocity.version>2.3</velocity.version>
+        <httpclient.version>5.2.1</httpclient.version>
+        <lombok.version>1.18.24</lombok.version>
+        <slf4j.version>2.0.6</slf4j.version>
+        <logback.version>1.4.5</logback.version>
+        <junit.version>5.9.1</junit.version>
+        <assertj.version>3.23.1</assertj.version>
+        <commons-compress.version>1.22</commons-compress.version>
         <repository.path>${project.build.directory}/local-repository</repository.path>
     </properties>
 
@@ -50,12 +50,12 @@
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
+            <artifactId>velocity-engine-core</artifactId>
             <version>${velocity.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
             <version>${httpclient.version}</version>
         </dependency>
         <dependency>

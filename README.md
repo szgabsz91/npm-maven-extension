@@ -75,7 +75,8 @@ A sample settings.xml file looks like this:
 
 ### pom.xml
 
-In the pom.xml file of your client project, you must
+In the pom.xml file of your client project, you must reference the NPM dependencies with the *npm* type property, and
+define the extension, as well as the plugin.
 
 A sample pom.xml file looks like this:
 
@@ -93,9 +94,9 @@ A sample pom.xml file looks like this:
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <bootstrap.version>4.3.1</bootstrap.version>
-        <_angular_router.version>7.2.15</_angular_router.version>
-        <npm-maven-extension.version>1.0.0-SNAPSHOT</npm-maven-extension.version>
+        <bootstrap.version>5.2.3</bootstrap.version>
+        <_angular_router.version>15.0.4</_angular_router.version>
+        <npm-maven-extension.version>1.0.0</npm-maven-extension.version>
     </properties>
 
     <dependencies>
@@ -144,8 +145,8 @@ A sample pom.xml file looks like this:
 </project>
 ```
 
-This project downloads [bootstrap@4.3.1](https://www.npmjs.com/package/bootstrap) and
-[@angular/router@7.2.15](https://www.npmjs.com/package/@angular/router) into the `src/main/resources/static/npm` folder.
+This project downloads [bootstrap@5.2.3](https://www.npmjs.com/package/bootstrap) and
+[@angular/router@15.0.4](https://www.npmjs.com/package/@angular/router) into the `src/main/resources/static/npm` folder.
 
 For a working example, see the [demo application](demo).
 

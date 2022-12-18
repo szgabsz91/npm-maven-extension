@@ -10,7 +10,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.archiver.tar.TarGZipUnArchiver;
-import org.codehaus.plexus.logging.console.ConsoleLoggerManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,8 +101,6 @@ public class ExtractMojo extends AbstractMojo {
 
     private static void extract(Path targzFile, Path destinationFolder) {
         TarGZipUnArchiver tarGZipUnArchiver = new TarGZipUnArchiver();
-        ConsoleLoggerManager consoleLoggerManager = new ConsoleLoggerManager();
-        tarGZipUnArchiver.enableLogging(consoleLoggerManager.getLoggerForComponent("npm-maven-plugin"));
         tarGZipUnArchiver.setSourceFile(targzFile.toFile());
         destinationFolder.toFile().mkdirs();
         tarGZipUnArchiver.setDestDirectory(destinationFolder.toFile());
