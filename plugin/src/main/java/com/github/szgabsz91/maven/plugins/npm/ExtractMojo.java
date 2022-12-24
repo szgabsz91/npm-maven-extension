@@ -3,7 +3,6 @@ package com.github.szgabsz91.maven.plugins.npm;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -17,15 +16,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 
+/**
+ * Extracts the previously downloaded NPM dependencies from the local Maven repository to a pre-configured folder.
+ * @author szgabsz91
+ */
 @Mojo(name = "extract", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyCollection = ResolutionScope.COMPILE)
 public class ExtractMojo extends AbstractMojo {
 
-    @Component
+    @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
     @Parameter(name = "outputFolder", defaultValue = "${project.build.directory/npm}", required = false)
     private File outputFolder;
 
+    /**
+     * Default constructor.
+     */
+    ExtractMojo() {
+    }
+
+    /**
+     * Extracts the previously downloaded NPM dependencies from the local Maven repository to a pre-configured folder.
+     * @throws MojoExecutionException if a dependency cannot be extracted
+     */
     public void execute() throws MojoExecutionException {
         Path outputFolder = this.outputFolder.toPath();
         recreateFolder(outputFolder);

@@ -3,7 +3,6 @@
 [![Build Status](https://img.shields.io/circleci/project/github/szgabsz91/npm-maven-extension/master.svg)](https://circleci.com/gh/szgabsz91/workflows/npm-maven-extension)
 [![License](https://img.shields.io/github/license/szgabsz91/npm-maven-extension.svg)](https://github.com/szgabsz91/npm-maven-extension/blob/master/LICENSE)
 
-
 This is an experimental project that demonstrates an alternative way of downloading NPM packages during a Maven build.
 
 The most mainstream way of doing this would be to use [webjars](https://www.webjars.org/). This project contains another
@@ -20,6 +19,8 @@ The main building blocks are the following:
                               extracted resources can be referenced by your client web application.
 * [npm-maven-extension-demo](demo): a Spring Boot demo application that contains a single HTML page that displays a
                                     Bootstrap based welcome page. Bootstrap is downloaded using the custom extension.
+
+The site documentation of this project can be found on [Github Pages](https://szgabsz91.github.io/npm-maven-extension/introduction.html).
 
 ## Requirements
 

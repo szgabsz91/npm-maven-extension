@@ -25,6 +25,12 @@ public final class NpmPackage {
     private String version;
 
     /**
+     * Default constructor.
+     */
+    public NpmPackage() {
+    }
+
+    /**
      * Factory method for constructing an {@link NpmPackage} from the given resource name.
      * A resource name might look like "npm/npm-package/1.1.0-SNAPSHOT/npm-package-1.1.0-SNAPSHOT.pom".
      * Here, the second part is the package name and the third part is the version.

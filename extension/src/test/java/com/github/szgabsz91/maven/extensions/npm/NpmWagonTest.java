@@ -102,7 +102,8 @@ public class NpmWagonTest {
 
     public void testOpenConnectionInternal(Parameters parameters) throws ConnectionException, AuthenticationException {
         Wagon wagon = parameters.getWagon();
-        wagon.openConnection();
+        Repository repository = new Repository("npm-https", "https://registry.npmjs.org");
+        wagon.connect(repository);
     }
 
     public void testCloseConnection(Parameters parameters) throws ConnectionException {

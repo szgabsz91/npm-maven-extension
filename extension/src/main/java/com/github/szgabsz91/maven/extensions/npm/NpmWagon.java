@@ -7,9 +7,7 @@ import org.apache.hc.client5.http.auth.CredentialsProvider;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.auth.CredentialsProviderBuilder;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.maven.wagon.AbstractWagon;
@@ -168,39 +166,30 @@ public class NpmWagon extends AbstractWagon {
         CloseableHttpClient httpClient = HttpClients
             .custom()
             .setDefaultCredentialsProvider(credentialsProvider)
-
             .build();
-        CloseableHttpResponse closeableHttpResponse = null;
 
         try {
             String url = npmPackage.toUrl(protocol, repository);
             log.info("Downloading npm package {} from {}", npmPackage, url);
             HttpGet httpGet = new HttpGet(url);
-            closeableHttpResponse = httpClient.execute(httpGet);
-            int statusCode = closeableHttpResponse.getCode();
-            if (statusCode != HttpStatus.SC_OK) {
-                throw new ResourceDoesNotExistException("Cannot download npm package " + resourceName + ", status code: " + statusCode);
-            }
-            HttpEntity httpEntity = closeableHttpResponse.getEntity();
+            httpClient.execute(httpGet, response -> {
+                int statusCode = response.getCode();
+                if (statusCode != HttpStatus.SC_OK) {
+                    throw new IllegalArgumentException(new ResourceDoesNotExistException("Cannot download npm package " + resourceName + ", status code: " + statusCode));
+                }
 
-            try (InputStream inputStream = httpEntity.getContent();
-                 OutputStream outputStream = Files.newOutputStream(destination)) {
-                IOUtils.copy(inputStream, outputStream);
-            }
+                try (InputStream inputStream = response.getEntity().getContent();
+                     OutputStream outputStream = Files.newOutputStream(destination)) {
+                    IOUtils.copy(inputStream, outputStream);
+                }
+
+                return null;
+            });
         }
         catch (IOException e) {
             throw new TransferFailedException("Cannot download npm package " + resourceName + " to " + destination, e);
         }
         finally {
-            if (closeableHttpResponse != null) {
-                try {
-                    closeableHttpResponse.close();
-                }
-                catch (IOException e) {
-                    log.warn("Could not close CloseableHttpResponse", e);
-                }
-            }
-
             try {
                 httpClient.close();
             }

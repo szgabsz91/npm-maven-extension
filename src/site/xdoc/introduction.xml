@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Introduction</title>
+        <author email="szgabsz91@gmail.com">Gabor Szabo</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>This is an experimental project that demonstrates an alternative way of downloading NPM packages during a Maven build.</p>
+
+            <p>
+                The most mainstream way of doing this would be to use [webjars](https://www.webjars.org/). This project contains another
+                way that I don't recommend using in production, but had much fun implementing it.
+            </p>
+        </section>
+
+        <section name="Building Blocks">
+            <p>The main building blocks are the following:</p>
+
+            <ul>
+                <li>
+                    <a href="npm-maven-extension">npm-maven-extension</a>:
+                    downloads the NPM packages added to the pom.xml from an arbitrary NPM repository,
+                    with or without authentication. The downloaded tar.gz file will be stored in the
+                    local Maven repository.
+                </li>
+                <li>
+                    <a href="npm-maven-plugin">npm-maven-plugin</a>:
+                    during the Maven build, the <em>extract</em> goal can extract the downloaded tar.gz
+                    file into an arbitrary, configurable folder. The extracted resources can be referenced
+                    by your client web application.
+                </li>
+                <li>
+                    <a href="https://github.com/szgabsz91/npm-maven-extension/tree/master/demo" target="_blank">npm-maven-extension-demo</a>:
+                    a Spring Boot demo application that contains a single HTML page that displays
+                    a Bootstrap based welcome page. Bootstrap is downloaded using the custom extension.
+                </li>
+            </ul>
+        </section>
+    </body>
+
+</document>

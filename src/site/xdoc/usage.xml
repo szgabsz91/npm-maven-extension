@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Usage</title>
+        <author email="szgabsz91@gmail.com">Gabor Szabo</author>
+    </properties>
+
+    <body>
+        <section name="settings.xml">
+            <p>
+                The <tt>~/.m2/settings.xml</tt> file must at least contain an NPM server and a repository that uses
+                <em>npm-http</em> or <em>npm-https</em> as its protocol. The URL can point to the public npmjs.org server
+                or any other private NPM repositories. The server node can contain authentication information, too.
+            </p>
+
+            <p>A sample <tt>settings.xml</tt> file looks like this:</p>
+
+            <source>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;
+          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+          xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd&quot;&gt;
+
+    &lt;servers&gt;
+        &lt;server&gt;
+            &lt;id&gt;npm&lt;/id&gt;
+            &lt;username&gt;${optional_username}&lt;/username&gt;
+            &lt;password&gt;${optional_password}&lt;/password&gt;
+        &lt;/server&gt;
+    &lt;/servers&gt;
+
+    &lt;profiles&gt;
+        &lt;profile&gt;
+            &lt;id&gt;npm&lt;/id&gt;
+            &lt;repositories&gt;
+                &lt;repository&gt;
+                    &lt;id&gt;npm&lt;/id&gt;
+                    &lt;url&gt;npm-https://registry.npmjs.org&lt;/url&gt;
+                    &lt;releases&gt;
+                        &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+                        &lt;checksumPolicy&gt;ignore&lt;/checksumPolicy&gt;
+                    &lt;/releases&gt;
+                    &lt;snapshots&gt;
+                        &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+                        &lt;checksumPolicy&gt;ignore&lt;/checksumPolicy&gt;
+                    &lt;/snapshots&gt;
+                &lt;/repository&gt;
+            &lt;/repositories&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+
+    &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;npm&lt;/activeProfile&gt;
+    &lt;/activeProfiles&gt;
+
+&lt;/settings&gt;</source>
+        </section>
+
+        <section name="pom.xml">
+            <p>
+                In the <tt>pom.xml</tt> file of your client project, you must reference the NPM dependencies with the
+                <em>npm</em> type property, and define the extension, as well as the plugin.
+            </p>
+
+            <p>A sample <tt>pom.xml</tt> file looks like this:</p>
+
+            <source>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.demo&lt;/groupId&gt;
+    &lt;artifactId&gt;demo&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;bootstrap.version&gt;5.2.3&lt;/bootstrap.version&gt;
+        &lt;_angular_router.version&gt;15.0.4&lt;/_angular_router.version&gt;
+        &lt;npm-maven-extension.version&gt;1.0.0&lt;/npm-maven-extension.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;npm&lt;/groupId&gt;
+            &lt;artifactId&gt;bootstrap&lt;/artifactId&gt;
+            &lt;version&gt;${bootstrap.version}&lt;/version&gt;
+            &lt;type&gt;npm&lt;/type&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;npm&lt;/groupId&gt;
+            &lt;artifactId&gt;_angular_router&lt;/artifactId&gt;
+            &lt;version&gt;${_angular_router.version}&lt;/version&gt;
+            &lt;type&gt;npm&lt;/type&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;extensions&gt;
+            &lt;extension&gt;
+                &lt;groupId&gt;com.github.szgabsz91&lt;/groupId&gt;
+                &lt;artifactId&gt;npm-maven-extension&lt;/artifactId&gt;
+                &lt;version&gt;${npm-maven-extension.version}&lt;/version&gt;
+            &lt;/extension&gt;
+        &lt;/extensions&gt;
+
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;com.github.szgabsz91&lt;/groupId&gt;
+                &lt;artifactId&gt;npm-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;${npm-maven-extension.version}&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;extract&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+                &lt;configuration&gt;
+                    &lt;outputFolder&gt;${project.basedir}/src/main/resources/static/npm&lt;/outputFolder&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;</source>
+
+            <p>
+                This project downloads <tt><a href="https://www.npmjs.com/package/bootstrap" target="_blank">bootstrap@5.2.3</a></tt> and
+                <tt><a href="https://www.npmjs.com/package/@angular/router" target="_blank">@angular/router@15.0.4</a></tt>
+                into the <tt>src/main/resources/static/npm</tt> folder.
+            </p>
+
+            <p>
+                For a working example, see the
+                <a href="https://github.com/szgabsz91/npm-maven-extension/tree/master/demo" target="_blank">demo application</a>.
+            </p>
+        </section>
+    </body>
+
+</document>
