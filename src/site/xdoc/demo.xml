@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Demo Application</title>
+        <author email="szgabsz91@gmail.com">Gabor Szabo</author>
+    </properties>
+
+    <body>
+        <section name="Demo Application">
+            <p>You can test the project with the following commands:</p>
+
+            <source>./mvnw clean site install
+cd demo
+./mvnw clean install</source>
+
+            <p>After that, if you open the <tt>demo/src/main/resources/static/npm</tt> folder, you'll see</p>
+
+            <ul>
+                <li>
+                    <tt>angular</tt>
+
+                    <ul>
+                        <li>
+                            <tt>router</tt>
+
+                            <ul>
+                                <li>
+                                    <tt>package</tt>
+
+                                    <ul>
+                                        <li>...</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <tt>bootstrap</tt>
+
+                    <ul>
+                        <li>...</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>Also, you can build a Docker image from this simple war project and run it:</p>
+
+            <source>./mvnw clean install -Pdocker
+docker run -p 8080:8080 npm-maven-extension-demo</source>
+
+            <p>After that, opening <tt>http://localhost:8080/npm-maven-extension-demo</tt>, you'll see a Bootstrap based welcome page.</p>
+        </section>
+    </body>
+
+</document>

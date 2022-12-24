@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Responsibilities</title>
+        <author email="szgabsz91@gmail.com">Gabor Szabo</author>
+    </properties>
+
+    <body>
+        <section name="Responsibilities">
+            <p>The extension has the following responsibilities:</p>
+
+            <ul>
+                <li>Downloads the NPM package dependencies from a pre-configured NPM repository to the local Maven repository.</li>
+                <li>Can use HTTP or HTTPS protocols.</li>
+                <li>Generates dummy <tt>pom.xml</tt> files for each dependency.</li>
+            </ul>
+        </section>
+    </body>
+
+</document>

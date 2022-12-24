@@ -26,7 +26,23 @@
         <spotbugs-maven-plugin.version>4.7.3.0</spotbugs-maven-plugin.version>
         <maven-pmd-plugin.version>3.19.0</maven-pmd-plugin.version>
         <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+        <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
     </properties>
+
+    <scm>
+        <connection>scm:git:https://github.com/szgabsz91/npm-maven-extension.git</connection>
+        <developerConnection>scm:git:https://github.com/szgabsz91/npm-maven-extension.git</developerConnection>
+        <url>https://github.com/szgabsz91/npm-maven-extension</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>site</id>
+            <name>Github Pages</name>
+            <url>scm:git:https://github.com/szgabsz91/npm-maven-extension.git</url>
+        </site>
+    </distributionManagement>
 
     <build>
         <plugins>
@@ -87,6 +103,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>${maven-scm-publish-plugin.version}</version>
+                <configuration>
+                    <pubScmUrl>${project.scm.developerConnection}</pubScmUrl>
+                    <scmBranch>gh-pages</scmBranch>
+                </configuration>
             </plugin>
         </plugins>
     </build>
