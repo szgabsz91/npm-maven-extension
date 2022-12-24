@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.github.szgabsz91.maven.plugins.npm"}];updateSearchResults();

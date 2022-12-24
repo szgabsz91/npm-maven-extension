@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.github.szgabsz91.maven.extensions.npm","l":"NpmHttpsWagon"},{"p":"com.github.szgabsz91.maven.extensions.npm","l":"NpmHttpWagon"},{"p":"com.github.szgabsz91.maven.extensions.npm.model","l":"NpmPackage"},{"p":"com.github.szgabsz91.maven.extensions.npm","l":"NpmWagon"}];updateSearchResults();

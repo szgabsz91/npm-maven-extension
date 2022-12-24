@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.github.szgabsz91.maven.plugins.npm","c":"ExtractMojo","l":"execute()"}];updateSearchResults();
