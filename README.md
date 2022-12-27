@@ -1,5 +1,6 @@
 # npm-maven-extension
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.szgabsz91/npm-maven-extension-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.szgabsz91/npm-maven-extension-parent)
 [![Build Status](https://img.shields.io/circleci/project/github/szgabsz91/npm-maven-extension/master.svg)](https://circleci.com/gh/szgabsz91/workflows/npm-maven-extension)
 [![License](https://img.shields.io/github/license/szgabsz91/npm-maven-extension.svg)](https://github.com/szgabsz91/npm-maven-extension/blob/master/LICENSE)
 

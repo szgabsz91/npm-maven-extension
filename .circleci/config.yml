@@ -12,9 +12,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Copy settings.xml
-          command: mkdir -p ~/.m2 && cp ./.circleci/settings.xml ~/.m2/settings.xml
-      - run:
           name: Build framework
           command: ./mvnw clean install
       - run:
@@ -23,8 +20,9 @@ jobs:
       - run:
           name: Build demo application
           command: |
-              cd demo
-              ./mvnw clean install
+            PROJECT_VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+            cd demo
+            ./mvnw clean install -s ../.circleci/settings.xml -Dnpm-maven-extension.version=$PROJECT_VERSION
       - persist_to_workspace:
           root: .
           paths:
@@ -36,8 +34,14 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Import GPG key
+          command: echo -e "$GPG_SECRET" | gpg --import --no-tty --batch --yes
+      - run:
+          name: Release artifact to Maven Central
+          command: ./mvnw deploy -Prelease -s ./.circleci/settings.xml -Dgpg.passphrase=${GPG_PASSPHRASE}
+      - run:
           name: Publish sitedoc
-          command: ./mvnw -Dusername=${GITHUB_USERNAME} -Dpassword=${GITHUB_TOKEN} scm-publish:publish-scm
+          command: ./mvnw scm-publish:publish-scm -Dusername=${GITHUB_USERNAME} -Dpassword=${GITHUB_TOKEN}
           environment:
             GIT_AUTHOR_NAME: $GIT_AUTHOR_NAME
             GIT_AUTHOR_EMAIL: $GIT_AUTHOR_EMAIL
