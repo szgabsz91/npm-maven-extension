@@ -20,6 +20,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<npm-maven-extension.version>${project.version}</npm-maven-extension.version>
 		<bootstrap.version>5.2.3</bootstrap.version>
 		<_angular_router.version>15.0.4</_angular_router.version>
 		<maven-war-plugin.version>3.3.2</maven-war-plugin.version>
@@ -46,7 +47,7 @@
 			<extension>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>npm-maven-extension</artifactId>
-				<version>${project.version}</version>
+				<version>${npm-maven-extension.version}</version>
 			</extension>
 		</extensions>
 
@@ -54,7 +55,7 @@
 			<plugin>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>npm-maven-plugin</artifactId>
-				<version>${project.version}</version>
+				<version>${npm-maven-extension.version}</version>
 				<executions>
 					<execution>
 						<goals>
