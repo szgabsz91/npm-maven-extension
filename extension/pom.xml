@@ -6,10 +6,10 @@
     <parent>
         <groupId>com.github.szgabsz91</groupId>
         <artifactId>npm-maven-extension-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>npm-maven-extension</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>${project.artifactId}</name>
     <description>Maven extension for managing npm package dependencies with Maven</description>
