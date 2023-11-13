@@ -1,4 +1,4 @@
-FROM tomcat:10-jre17
+FROM tomcat:10.1-jre21
 
 MAINTAINER szgabsz91
 

@@ -81,7 +81,7 @@ public class NpmWagon extends AbstractWagon {
      *
      * {@inheritDoc}
      */
-    public final boolean getIfNewer(String resourceName, File destination, long timestamp) throws TransferFailedException, ResourceDoesNotExistException {
+    public final boolean getIfNewer(String resourceName, File destination, long timestamp) throws TransferFailedException {
         if (!resourceName.endsWith(".pom") && !resourceName.endsWith(".npm")) {
             return false;
         }
@@ -100,7 +100,7 @@ public class NpmWagon extends AbstractWagon {
      *
      * {@inheritDoc}
      */
-    public final void get(String resourceName, File destination) throws TransferFailedException, ResourceDoesNotExistException {
+    public final void get(String resourceName, File destination) throws TransferFailedException {
         log.info("Trying to download {} into {}", resourceName, destination);
 
         if (resourceName.endsWith(".pom")) {
@@ -150,9 +150,8 @@ public class NpmWagon extends AbstractWagon {
      * @param resourceName the name of the resource
      * @param destination the destination file
      * @throws TransferFailedException if the npm package cannot be downloaded
-     * @throws ResourceDoesNotExistException if the resource cannot be found in the repository
      */
-    private void downloadNpmPackage(String resourceName, Path destination) throws TransferFailedException, ResourceDoesNotExistException {
+    private void downloadNpmPackage(String resourceName, Path destination) throws TransferFailedException {
         NpmPackage npmPackage = NpmPackage.fromResourceName(resourceName);
         AuthenticationInfo authenticationInfo = getAuthenticationInfo();
         CredentialsProvider credentialsProvider = null;

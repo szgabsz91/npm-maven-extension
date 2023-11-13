@@ -136,13 +136,13 @@ public class NpmWagonTest {
         assertNpm(destination, "package/dist/node-jquery.js");
     }
 
-    public void testGetIfNewerWithUnknownResourceType(Parameters parameters) {
+    public void testGetIfNewerWithUnknownResourceType(Parameters parameters) throws AuthorizationException, TransferFailedException, ResourceDoesNotExistException {
         Wagon wagon = parameters.getWagon();
         Path tempFolder = parameters.getTempFolder();
         String resourceName = "unknown";
         Path destination = Paths.get(tempFolder.toString(), "unknown");
-
-        assertThrows(IllegalArgumentException.class, () -> wagon.getIfNewer(resourceName, destination.toFile(), 0L), "Unsupported resource " + resourceName + " and file " + destination.toFile());
+        boolean result = wagon.getIfNewer(resourceName, destination.toFile(), 0L);
+        assertThat(result).isFalse();
     }
 
     public void testGetWithPom(Parameters parameters) throws TransferFailedException, ResourceDoesNotExistException, AuthorizationException, IOException, ParserConfigurationException, SAXException, XPathExpressionException {
@@ -187,15 +187,17 @@ public class NpmWagonTest {
         Path tempFolder = parameters.getTempFolder();
         String resourceName = "npm/nonexistent/100.0.0/othername-100.0.0.npm";
         Path destination = Paths.get(tempFolder.toString(), "othername.npm");
-        assertThrows(ResourceDoesNotExistException.class, () -> wagon.get(resourceName, destination.toFile()), "Cannot download npm package " + resourceName + ", status code: 404");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> wagon.get(resourceName, destination.toFile()));
+        assertThat(exception).hasCause(new ResourceDoesNotExistException("Cannot download npm package " + resourceName + ", status code: 404"));
     }
 
-    public void testGetWithUnknownResourceType(Parameters parameters) {
+    public void testGetWithUnknownResourceType(Parameters parameters) throws AuthorizationException, TransferFailedException, ResourceDoesNotExistException {
         Wagon wagon = parameters.getWagon();
         Path tempFolder = parameters.getTempFolder();
         String resourceName = "unknown";
         Path destination = Paths.get(tempFolder.toString(), "unknown");
-        assertThrows(IllegalArgumentException.class, () -> wagon.get(resourceName, destination.toFile()), "Unsupported resource " + resourceName + " and file " + destination.toFile());
+        wagon.get(resourceName, destination.toFile());
+        assertThat(destination.toFile()).doesNotExist();
     }
 
     private static void assertPomXml(Path file, String groupId, String artifactId, String version) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
@@ -243,7 +245,7 @@ public class NpmWagonTest {
 
     @Data
     @RequiredArgsConstructor
-    class Parameters {
+    public static class Parameters {
 
         @NonNull
         private String protocol;
