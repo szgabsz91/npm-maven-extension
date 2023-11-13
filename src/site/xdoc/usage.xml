@@ -80,7 +80,7 @@
     &lt;properties&gt;
         &lt;bootstrap.version&gt;5.2.3&lt;/bootstrap.version&gt;
         &lt;_angular_router.version&gt;15.0.4&lt;/_angular_router.version&gt;
-        &lt;npm-maven-extension.version&gt;1.0.0&lt;/npm-maven-extension.version&gt;
+        &lt;npm-maven-extension.version&gt;1.0.1&lt;/npm-maven-extension.version&gt;
     &lt;/properties&gt;
 
     &lt;dependencies&gt;

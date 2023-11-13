@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: cimg/openjdk:19.0.1
+      - image: openjdk:21-jdk-bookworm
     working_directory: ~/npm-maven-extension
 
 jobs:

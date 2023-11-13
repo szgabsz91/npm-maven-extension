@@ -21,14 +21,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-        <maven-project-info-reports-plugin.version>3.4.1</maven-project-info-reports-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <spotbugs-maven-plugin.version>4.7.3.0</spotbugs-maven-plugin.version>
-        <maven-pmd-plugin.version>3.19.0</maven-pmd-plugin.version>
-        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
-        <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+        <spotbugs-maven-plugin.version>4.8.1.0</spotbugs-maven-plugin.version>
+        <maven-pmd-plugin.version>3.21.2</maven-pmd-plugin.version>
+        <maven-javadoc-plugin.version>3.6.2</maven-javadoc-plugin.version>
+        <maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
+        <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+        <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
     </properties>
 
     <build>

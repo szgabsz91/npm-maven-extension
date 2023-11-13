@@ -98,7 +98,7 @@ A sample pom.xml file looks like this:
     <properties>
         <bootstrap.version>5.2.3</bootstrap.version>
         <_angular_router.version>15.0.4</_angular_router.version>
-        <npm-maven-extension.version>1.0.0</npm-maven-extension.version>
+        <npm-maven-extension.version>1.0.1</npm-maven-extension.version>
     </properties>
 
     <dependencies>
