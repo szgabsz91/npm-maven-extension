@@ -1,7 +1,7 @@
 # npm-maven-extension
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.szgabsz91/npm-maven-extension-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.szgabsz91/npm-maven-extension-parent)
 [![Build Status](https://img.shields.io/circleci/project/github/szgabsz91/npm-maven-extension/master.svg)](https://circleci.com/gh/szgabsz91/workflows/npm-maven-extension)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.szgabsz91/npm-maven-extension-parent)](https://central.sonatype.com/artifact/com.github.szgabsz91/npm-maven-extension-parent)
 [![License](https://img.shields.io/github/license/szgabsz91/npm-maven-extension.svg)](https://github.com/szgabsz91/npm-maven-extension/blob/master/LICENSE)
 
 This is an experimental project that demonstrates an alternative way of downloading NPM packages during a Maven build.
